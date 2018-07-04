@@ -1,0 +1,71 @@
+@import 'package:angular_components/css/material/material';
+
+// Override font size.
+$mat-font-size-body: 14px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @include mat-font-body;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+  margin: 0 0 2 * $mat-grid;
+}
+
+// GitHub Corner (https://github.com/tholman/github-corners).
+.github-corner {
+  color: $mat-white;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.secondary {
+  @include mat-font-caption;
+}
+
+.version {
+  margin-bottom: 2 * $mat-grid;
+}
+
+// Small screens (mobile).
+@media screen and (max-width: 719px) {
+  body {
+    margin: 2 * $mat-grid;
+  }
+
+  // Animate arm on load (https://github.com/tholman/github-corners).
+  .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+// Large screens (desktop, tablet).
+@media screen and (min-width: 720px) {
+  body {
+    margin: 3 * $mat-grid;
+  }
+
+  // Animate arm on hover (https://github.com/tholman/github-corners).
+  .github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+// Keyframes for GitHub corner (https://github.com/tholman/github-corners).
+@keyframes octocat-wave {
+  0%,100% {
+    transform:rotate(0);
+  }
+  20%,60% {
+    transform:rotate(-25deg);
+  }
+  40%,80% {
+    transform:rotate(10deg);
+  }
+}

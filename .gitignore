@@ -1,0 +1,6 @@
+.dart_tool/
+.firebaserc
+.packages
+deploy/
+doc/
+pubspec.lock

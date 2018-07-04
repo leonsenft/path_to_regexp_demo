@@ -1,0 +1,18 @@
+global_options:
+  angular|angular:
+    options:
+      no-emit-component-factories: True
+      no-emit-injectable-factories: True
+
+targets:
+  $default:
+    builders:
+      build_web_compilers|entrypoint:
+        generate_for:
+        - web/**.dart
+        options:
+          dart2js_args:
+          - --minify
+          - --no-source-maps
+          - --omit-implicit-checks
+          - --trust-primitives

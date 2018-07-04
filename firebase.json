@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": "deploy",
+    "ignore": [
+      "**/.*",
+      "packages/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

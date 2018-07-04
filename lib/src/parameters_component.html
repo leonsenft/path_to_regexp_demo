@@ -1,0 +1,17 @@
+<h2>Parameters</h2>
+
+<div *ngIf="parameters.isEmpty">
+  This route has no parameters.
+</div>
+
+<div *ngIf="parameters.isNotEmpty">
+  This route has the following parameters.
+  <ul class="list">
+    <li *ngFor="let parameter of parameters" class="border item">
+      {{parameter.name}}
+      <span *ngIf="parameter.optional" class="secondary">
+        OPTIONAL
+      </span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,20 @@
+<h2>Match</h2>
+
+<div *ngIf="!model.hasMatch">
+  This path doesn't match.
+</div>
+
+<div *ngIf="model.hasMatch">
+  <ng-container *ngIf="model.args.isEmpty">
+    This path matches.
+  </ng-container>
+  <ng-container *ngIf="model.args.isNotEmpty">
+    This path matches with the following arguments.
+  </ng-container>
+  <ul class="list">
+    <li *ngFor="let entry of model.args.entries" class="border item">
+      <span class="key secondary">{{entry.key}}</span>
+      {{entry.value}}
+    </li>
+  </ul>
+</div>

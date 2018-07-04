@@ -1,0 +1,93 @@
+@import 'package:angular_components/css/material/material';
+@import 'package:angular_components/material_input/mixins';
+
+$border-width: 1px;
+
+// Layout for the labels and inputs.
+.grid {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 8 * $mat-grid auto;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.input {
+  @include input-hide-bottom-section;
+  @include input-top-section-margin($mat-grid);
+
+  // Default width is too narrow.
+  max-width: 40 * $mat-grid;
+  width: 100%;
+}
+
+.label {
+  font-weight: $mat-font-weight-bold;
+}
+
+// Layout for the result panels.
+.panel {
+  background-color: $mat-grey-50;
+  flex: 1;
+  padding: 2 * $mat-grid;
+}
+
+.panels {
+  display: flex;
+}
+
+// Styles the match panel when there's a match.
+.yes {
+  background-color: $mat-green-50;
+}
+
+// Styles the match panel when there's no match.
+.no {
+  background-color: $mat-red-50;
+}
+
+// Small screens (mobile).
+@media screen and (max-width: 719px) {
+  .panel {
+    margin-top: 2 * $mat-grid;
+  }
+
+  .panels {
+    flex-direction: column;
+  }
+}
+
+// Large screens (desktop, tablet).
+@media screen and (min-width: 720px) {
+  .panel {
+    margin-top: 3 * $mat-grid;
+
+    &:not(:first-child) {
+      margin-left: 3 * $mat-grid;
+    }
+  }
+}
+
+// Global theme styles that don't need to be loaded until the app component has
+// rendered.
+::ng-deep {
+  .border {
+    border: $border-width solid $mat-border-light;
+    border-radius: 4px;
+  }
+
+  .item {
+    align-items: center;
+    background-color: $mat-white;
+    display: flex;
+    margin: $mat-grid 0 0;
+    // Prevent item from rendering too small in case its text is empty.
+    //          |----border-----|   |--padding--|   |-----line height------|
+    min-height: 2 * $border-width + 2 * $mat-grid + $mat-font-leading-body-1;
+    padding: $mat-grid 2 * $mat-grid;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+  }
+}
