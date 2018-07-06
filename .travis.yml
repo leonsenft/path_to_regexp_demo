@@ -1,0 +1,28 @@
+language: dart
+
+sudo: required
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - $HOME/.pub-cache
+    - .dart_tool
+
+dart: dev
+
+stages:
+  - format
+  - build
+  - test
+
+jobs:
+  include:
+    - stage: format
+      script: dartfmt -n --set-exit-if-changed .
+    - stage: build
+      script: pub run build_runner build
+    - stage: test
+      script: pub run build_runner test -- -p chrome
