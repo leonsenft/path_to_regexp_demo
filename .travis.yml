@@ -25,4 +25,4 @@ jobs:
     - stage: build
       script: pub run build_runner build
     - stage: test
-      script: pub run build_runner test -- -p chrome
+      script: pub run build_runner test
