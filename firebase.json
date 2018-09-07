@@ -11,5 +11,6 @@
         "destination": "/index.html"
       }
     ]
-  }
+  },
+  "predeploy": "pub run build_runner build -o web:deploy --fail-on-severe --release"
 }
