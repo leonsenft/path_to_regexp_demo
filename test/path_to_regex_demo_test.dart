@@ -5,7 +5,6 @@ import 'package:path_to_regexp_demo/app_component.template.dart';
 import 'package:test/test.dart';
 
 import 'page_objects/app_po.dart';
-import 'page_objects/parameters_po.dart';
 
 void main() {
   AppPO appPO;
@@ -34,7 +33,7 @@ void main() {
   test('simple route', () async {
     await testFixture.update((_) => appPO.routeInputPO.setValue('/user/:id'));
     expect(appPO.patternPO.pattern, r'^/user/([^/]+?)$');
-    expect(appPO.parametersPO.parameters, [Parameter('id')]);
+    expect(appPO.parametersPO.parameters, ['id']);
     expect(appPO.matchPO.hasMatch, isFalse);
     await testFixture.update((_) => appPO.pathInputPO.setValue('/user/12'));
     expect(appPO.matchPO.hasMatch, isTrue);
@@ -46,7 +45,7 @@ void main() {
       ..routeInputPO.setValue(r'/user/:id(\d+)')
       ..pathInputPO.setValue('/user/12'));
     expect(appPO.patternPO.pattern, r'^/user/(\d+)$');
-    expect(appPO.parametersPO.parameters, [Parameter('id')]);
+    expect(appPO.parametersPO.parameters, ['id']);
     expect(appPO.matchPO.hasMatch, isTrue);
     expect(appPO.matchPO.arguments, {'id': '12'});
     await testFixture.update((_) => appPO.pathInputPO.setValue('/user/alice'));
@@ -58,22 +57,9 @@ void main() {
     await testFixture.update((_) => appPO
       ..routeInputPO.setValue('/group/:gid/user/:uid')
       ..pathInputPO.setValue('/group/1/user/12'));
-    expect(appPO.parametersPO.parameters, [Parameter('gid'), Parameter('uid')]);
+    expect(appPO.parametersPO.parameters, ['gid', 'uid']);
     expect(appPO.matchPO.hasMatch, isTrue);
     expect(appPO.matchPO.arguments, {'gid': '1', 'uid': '12'});
-  });
-
-  test('optional parameter', () async {
-    await testFixture.update((_) => appPO
-      ..routeInputPO.setValue('/user/:name?')
-      ..pathInputPO.setValue('/user'));
-    expect(appPO.patternPO.pattern, r'^/user(?:/([^/]+?))?$');
-    expect(appPO.parametersPO.parameters, [Parameter('name', optional: true)]);
-    expect(appPO.matchPO.hasMatch, isTrue);
-    expect(appPO.matchPO.arguments, isEmpty);
-    await testFixture.update((_) => appPO.pathInputPO.setValue('/user/alice'));
-    expect(appPO.matchPO.hasMatch, isTrue);
-    expect(appPO.matchPO.arguments, {'name': 'alice'});
   });
 
   test('prefix route', () async {

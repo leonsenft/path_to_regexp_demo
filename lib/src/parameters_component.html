@@ -9,9 +9,6 @@
   <ul class="list">
     <li *ngFor="let parameter of parameters" class="border item">
       {{parameter.name}}
-      <span *ngIf="parameter.optional" class="secondary">
-        OPTIONAL
-      </span>
     </li>
   </ul>
 </div>
