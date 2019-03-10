@@ -1,5 +1,6 @@
 *.g.dart
 .dart_tool/
+.firebase/
 .firebaserc
 .packages
 deploy/
