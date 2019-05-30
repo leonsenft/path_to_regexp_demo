@@ -4,7 +4,7 @@
 
 A [path\_to\_regexp][path-to-regexp] demo for testing routes.
 
-Try it out here https://path-to-regexp.firebaseapp.com!
+Try it out here https://path-to-regexp.web.app!
 
 ## Acknowledgements
 
