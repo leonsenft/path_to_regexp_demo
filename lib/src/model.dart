@@ -3,17 +3,17 @@ import 'dart:collection';
 import 'package:path_to_regexp/path_to_regexp.dart';
 
 class Model {
-  /// The regular expression created from [_route].
-  RegExp _regExp;
-
-  /// The tokens parsed from [_route].
-  List<Token> _tokens;
-
   Model(String initialRoute, String initialPath)
       : _route = initialRoute,
         _path = initialPath {
     _updateTokens();
   }
+
+  /// The regular expression created from [_route].
+  RegExp _regExp;
+
+  /// The tokens parsed from [_route].
+  List<Token> _tokens;
 
   /// Whether [path] matches [route].
   bool get hasMatch => _args != null;
