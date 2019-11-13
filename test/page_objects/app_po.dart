@@ -26,6 +26,11 @@ abstract class AppPO {
   PatternPO get patternPO;
 
   @ByTagName('material-checkbox')
+  @WithVisibleText('Case sensitive')
+  MaterialCheckboxPO get caseSensitiveCheckboxPO;
+
+  @ByTagName('material-checkbox')
+  @WithVisibleText('Prefix')
   MaterialCheckboxPO get prefixCheckboxPO;
 
   MaterialInputPO get routeInputPO => _materialInputsPO[0];

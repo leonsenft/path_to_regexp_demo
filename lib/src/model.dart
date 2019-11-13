@@ -37,6 +37,14 @@ class Model {
   /// The pattern created to match [route].
   String get pattern => _regExp.pattern;
 
+  /// Whether this route is case sensitive.
+  bool _isCaseSensitive = true;
+  bool get isCaseSensitive => _isCaseSensitive;
+  set isCaseSensitive(bool value) {
+    _isCaseSensitive = value;
+    _updateRegExp();
+  }
+
   /// Whether this route matches as a prefix.
   bool _prefix = false;
   bool get prefix => _prefix;
@@ -64,20 +72,17 @@ class Model {
   }
 
   void _updateRegExp() {
-    _regExp = tokensToRegExp(_tokens, prefix: _prefix);
+    _regExp = tokensToRegExp(
+      _tokens,
+      prefix: _prefix,
+      caseSensitive: _isCaseSensitive,
+    );
     _updateMatch();
   }
 
   void _updateTokens() {
     _tokens = parse(_route);
-    // TODO: replace with `whereType()` once supported by dart2js.
-    final parameters = <ParameterToken>[];
-    for (final token in _tokens) {
-      if (token is ParameterToken) {
-        parameters.add(token);
-      }
-    }
-    _parameters = UnmodifiableListView(parameters);
+    _parameters = UnmodifiableListView(_tokens.whereType());
     _updateRegExp();
   }
 }

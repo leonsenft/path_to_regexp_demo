@@ -1,10 +1,15 @@
 <div class="grid">
   <div class="label">Options</div>
-  <material-checkbox
-      class="checkbox"
-      [label]="'Prefix'"
-      [(ngModel)]="model.prefix">
-  </material-checkbox>
+  <div>
+    <material-checkbox
+        [label]="'Case sensitive'"
+        [(ngModel)]="model.isCaseSensitive">
+    </material-checkbox>
+    <material-checkbox
+        [label]="'Prefix'"
+        [(ngModel)]="model.prefix">
+    </material-checkbox>
+  </div>
 
   <div class="label">Route</div>
   <material-input

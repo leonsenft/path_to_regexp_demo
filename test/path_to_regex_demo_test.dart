@@ -21,6 +21,7 @@ void main() {
   tearDown(disposeAnyRunningTest);
 
   test('initial state', () async {
+    expect(appPO.caseSensitiveCheckboxPO.checked, isTrue);
     expect(appPO.prefixCheckboxPO.checked, isFalse);
     expect(appPO.routeInputPO.value, isEmpty);
     expect(appPO.pathInputPO.value, isEmpty);
@@ -70,6 +71,15 @@ void main() {
     expect(appPO.matchPO.hasMatch, isFalse);
     await testFixture.update((_) => appPO.prefixCheckboxPO.setValue(true));
     expect(appPO.patternPO.pattern, r'^/user(?=/|$)');
+    expect(appPO.matchPO.hasMatch, isTrue);
+  });
+
+  test('case insensitive route', () async {
+    await testFixture.update((_) =>
+        appPO..routeInputPO.setValue('/user')..pathInputPO.setValue('/USER'));
+    expect(appPO.matchPO.hasMatch, isFalse);
+    await testFixture
+        .update((_) => appPO.caseSensitiveCheckboxPO.setValue(false));
     expect(appPO.matchPO.hasMatch, isTrue);
   });
 }
