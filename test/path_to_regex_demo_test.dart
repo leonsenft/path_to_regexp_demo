@@ -32,54 +32,70 @@ void main() {
   });
 
   test('simple route', () async {
-    await testFixture.update((_) => appPO.routeInputPO.setValue('/user/:id'));
+    await testFixture.update((_) {
+      appPO.routeInputPO.setValue('/user/:id');
+    });
     expect(appPO.patternPO.pattern, r'^/user/([^/]+?)$');
     expect(appPO.parametersPO.parameters, ['id']);
     expect(appPO.matchPO.hasMatch, isFalse);
-    await testFixture.update((_) => appPO.pathInputPO.setValue('/user/12'));
+    await testFixture.update((_) {
+      appPO.pathInputPO.setValue('/user/12');
+    });
     expect(appPO.matchPO.hasMatch, isTrue);
     expect(appPO.matchPO.arguments, {'id': '12'});
   });
 
   test('custom parameter', () async {
-    await testFixture.update((_) => appPO
-      ..routeInputPO.setValue(r'/user/:id(\d+)')
-      ..pathInputPO.setValue('/user/12'));
+    await testFixture.update((_) {
+      appPO
+        ..routeInputPO.setValue(r'/user/:id(\d+)')
+        ..pathInputPO.setValue('/user/12');
+    });
     expect(appPO.patternPO.pattern, r'^/user/(\d+)$');
     expect(appPO.parametersPO.parameters, ['id']);
     expect(appPO.matchPO.hasMatch, isTrue);
     expect(appPO.matchPO.arguments, {'id': '12'});
-    await testFixture.update((_) => appPO.pathInputPO.setValue('/user/alice'));
+    await testFixture.update((_) {
+      appPO.pathInputPO.setValue('/user/alice');
+    });
     expect(appPO.matchPO.hasMatch, isFalse);
     expect(appPO.matchPO.arguments, isEmpty);
   });
 
   test('multiple parameters', () async {
-    await testFixture.update((_) => appPO
-      ..routeInputPO.setValue('/group/:gid/user/:uid')
-      ..pathInputPO.setValue('/group/1/user/12'));
+    await testFixture.update((_) {
+      appPO
+        ..routeInputPO.setValue('/group/:gid/user/:uid')
+        ..pathInputPO.setValue('/group/1/user/12');
+    });
     expect(appPO.parametersPO.parameters, ['gid', 'uid']);
     expect(appPO.matchPO.hasMatch, isTrue);
     expect(appPO.matchPO.arguments, {'gid': '1', 'uid': '12'});
   });
 
   test('prefix route', () async {
-    await testFixture.update((_) => appPO
-      ..routeInputPO.setValue('/user')
-      ..pathInputPO.setValue('/user/details'));
+    await testFixture.update((_) {
+      appPO
+        ..routeInputPO.setValue('/user')
+        ..pathInputPO.setValue('/user/details');
+    });
     expect(appPO.patternPO.pattern, r'^/user$');
     expect(appPO.matchPO.hasMatch, isFalse);
-    await testFixture.update((_) => appPO.prefixCheckboxPO.setValue(true));
+    await testFixture.update((_) {
+      appPO.prefixCheckboxPO.setValue(true);
+    });
     expect(appPO.patternPO.pattern, r'^/user(?=/|$)');
     expect(appPO.matchPO.hasMatch, isTrue);
   });
 
   test('case insensitive route', () async {
-    await testFixture.update((_) =>
-        appPO..routeInputPO.setValue('/user')..pathInputPO.setValue('/USER'));
+    await testFixture.update((_) {
+      appPO..routeInputPO.setValue('/user')..pathInputPO.setValue('/USER');
+    });
     expect(appPO.matchPO.hasMatch, isFalse);
-    await testFixture
-        .update((_) => appPO.caseSensitiveCheckboxPO.setValue(false));
+    await testFixture.update((_) {
+      appPO.caseSensitiveCheckboxPO.setValue(false);
+    });
     expect(appPO.matchPO.hasMatch, isTrue);
   });
 }
